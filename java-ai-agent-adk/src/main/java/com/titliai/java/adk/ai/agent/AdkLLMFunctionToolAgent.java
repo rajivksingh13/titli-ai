@@ -88,12 +88,12 @@ public class AdkLLMFunctionToolAgent {
                          Use the tools available to provide accurate and up-to-date information.
                         """)// Agent instructions
                 .tools(capitalTool)
-                .generateContentConfig(
-                        GenerateContentConfig.builder()
-                                .maxOutputTokens(250)
-                                .temperature(0.2F)
-                                .topP(0.8F)
-                                .build())// Generation parameters You can adjust how the underlying LLM generates responses using generate_content_config
+//                .generateContentConfig(
+//                        GenerateContentConfig.builder()
+//                                .maxOutputTokens(250)
+//                                .temperature(0.2F)
+//                                .topP(0.8F)
+//                                .build())// Generation parameters You can adjust how the underlying LLM generates responses using generate_content_config
                 .build();
 
     }
