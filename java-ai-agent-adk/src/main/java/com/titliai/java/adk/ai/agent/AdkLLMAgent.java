@@ -27,9 +27,9 @@ public class AdkLLMAgent {
 
     public static BaseAgent initAgent() {
         return LlmAgent.builder()
-                .name("learning-assistant")
-                .description("An AI assistant designed to help with learning and educational tasks.")
-                .model("gemini-2.0-flash")
+                .name("learning-assistant") // Agent name
+                .description("An AI assistant designed to help with learning and educational tasks.")// Agent description
+                .model("gemini-2.0-flash")// LLM model to use
                 .instruction("""
                          You are a helpful learning assistant.
                          Your role is to assist users with educational tasks, answer questions,
@@ -45,7 +45,7 @@ public class AdkLLMAgent {
 
                          Always be encouraging and supportive in your responses.
                          Use the tools available to provide accurate and up-to-date information.
-                        """)
+                        """)// Agent instructions
                 .build();
 
     }
