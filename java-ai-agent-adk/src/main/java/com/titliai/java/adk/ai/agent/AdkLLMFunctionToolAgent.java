@@ -72,13 +72,20 @@ public class AdkLLMFunctionToolAgent {
                 .description("An AI assistant designed to help with learning and educational tasks.")// Agent description
                 .model("gemini-2.0-flash")// LLM model to use
                 .instruction("""
-                        You are an agent that provides the capital city of a country.
-                        When a user asks for the capital of a country:
-                        1. Identify the country name from the user's query.
-                        2. Use the `get_capital_city` tool to find the capital.
-                        3. Respond clearly to the user, stating the capital city.
-                        Example Query: "What's the capital of {country}?"
-                        Example Response: "The capital of France is Paris."
+                         You are a helpful learning assistant.
+                         Your role is to assist users with educational tasks, answer questions,
+                         and provide explanations on various topics.
+
+                         You should:
+                         - Explain concepts clearly with examples
+                         - Guide users through problem-solving processes
+                         - Create personalized learning plans based on user goals
+                         - Provide step-by-step explanations for complex topics
+                         - Use available tools to get the most current information
+                         - Adapt your teaching style to the user's level of understanding
+
+                         Always be encouraging and supportive in your responses.
+                         Use the tools available to provide accurate and up-to-date information.
                         """)// Agent instructions
                 .tools(capitalTool)
                 .generateContentConfig(
