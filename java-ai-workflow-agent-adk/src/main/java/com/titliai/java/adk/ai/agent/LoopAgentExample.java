@@ -103,7 +103,7 @@ public class LoopAgentExample {
                 shouldContinue = continueInput.equals("y") || continueInput.equals("yes");
 
                 if (currentIteration >= maxIterations) {
-                    System.out.println("⚠️  Reached maximum iterations limit!");
+                    System.out.println("Reached maximum iterations limit!");
                 }
             }
                 
