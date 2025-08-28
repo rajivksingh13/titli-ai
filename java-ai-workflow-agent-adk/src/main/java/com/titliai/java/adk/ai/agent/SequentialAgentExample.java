@@ -13,6 +13,12 @@ import io.reactivex.rxjava3.core.Flowable;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/**
+ * Example of a Sequential Agent using Google's Agent Development Kit (ADK)
+ * Code Writer Agent: An LLM Agent that generates initial code based on a specification.
+ * Code Reviewer Agent: An LLM Agent that reviews the generated code for errors, style issues, and adherence to best practices. It receives the output of the Code Writer Agent.
+ * Code Refactorer Agent: An LLM Agent that takes the reviewed code (and the reviewer's comments) and refactors it to improve quality and address issues.
+ */
 public class SequentialAgentExample {
     public static BaseAgent ROOT_AGENT = initAgent();
     private static final String APP_NAME = "CodePipelineAgent";
