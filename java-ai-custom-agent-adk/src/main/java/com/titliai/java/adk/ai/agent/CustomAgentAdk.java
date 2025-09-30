@@ -19,6 +19,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Goal: Create a system that generates a story, iteratively refines it through critique and revision,
+ * performs final checks, and crucially, regenerates the story if the final tone check fails.
+ */
 public class CustomAgentAdk extends BaseAgent {
 
     // --- Constants ---

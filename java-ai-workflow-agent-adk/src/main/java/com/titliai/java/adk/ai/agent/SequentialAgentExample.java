@@ -18,7 +18,10 @@ import java.util.Scanner;
  * Code Writer Agent: An LLM Agent that generates initial code based on a specification.
  * Code Reviewer Agent: An LLM Agent that reviews the generated code for errors, style issues, and adherence to best practices. It receives the output of the Code Writer Agent.
  * Code Refactorer Agent: An LLM Agent that takes the reviewed code (and the reviewer's comments) and refactors it to improve quality and address issues.
+ *
+ * The output from each sub-agent is passed to the next by storing them in state via Output Key.
  */
+
 public class SequentialAgentExample {
     public static BaseAgent ROOT_AGENT = initAgent();
     private static final String APP_NAME = "CodePipelineAgent";
