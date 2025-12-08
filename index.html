@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Plan: How to Build, Test & Deploy AI Agents using Java and Google ADK</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 20px; background-color: #f4f7f6; }
+        .container { max-width: 900px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { color: #007bff; border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-top: 0; }
+        h2 { color: #28a745; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        h3 { color: #6c757d; margin-top: 20px; font-size: 1.2em; }
+        .meta-info, .recap { background-color: #e9f5ff; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 5px solid #007bff; }
+        .meta-info p { margin: 5px 0; }
+        .agenda-item { margin-bottom: 10px; padding-left: 15px; border-left: 3px solid #28a745; }
+        .code-block { background-color: #272c35; color: #f8f8f2; padding: 10px; border-radius: 4px; overflow-x: auto; margin-top: 5px; font-family: Consolas, 'Courier New', monospace; font-size: 0.9em; }
+        .code-block code { white-space: pre-wrap; }
+        .tip, .prereq { background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 10px; margin: 15px 0; border-radius: 4px; color: #856404; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>&#129302; Workshop Plan: How to Build, Test & Deploy AI Agents using Java and Google ADK</h1>
+
+    <div class="meta-info">
+        <p><strong>Audience:</strong> Java developers & power users comfortable with command line and Git</p>
+        <p><strong>Duration:</strong> 1 Hour (60 minutes)</p>
+        <p><strong>Format:</strong> 100% hands-on, instructor-led (live coding + follow-along)</p>
+        <p><strong>Repo:</strong> <code>java-ai-agent-adk</code> in branch: <code>java-ai-agents-google-adk</code> (on GitHub)</p>
+    </div>
+
+    <h2>&#128302; Agenda at a Glance (60 minutes)</h2>
+
+    <div class="agenda-item">
+        <h3>0–5 min — Kickoff & Architecture Primer</h3>
+        <ul>
+            <li>What is **Google ADK (Agent Development Kit)**? Components: Agents, Runner, Dev Web UI, AdkWebServer.</li>
+            <li>**Our Goal:** Run agents locally → containerize → deploy to Cloud Run (with health checks & env vars).</li>
+        </ul>
+    </div>
+
+    <div class="agenda-item">
+        <h3>5–12 min — Project Setup (Local)</h3>
+        <ul>
+            <li>Clone repo & open in IntelliJ IDEA.</li>
+            <li>Walk through <code>build.gradle</code> (ADK deps, Spring Boot web starter, Java 17).</li>
+            <li>Verify **JDK 17** and Gradle wrapper, set **GOOGLE_API_KEY** locally (PowerShell / bash).</li>
+            <li>Quick peek at <code>AdkLLMAgent</code> and <code>AdkWebServer</code>.</li>
+        </ul>
+    </div>
+
+    <div class="agenda-item">
+        <h3>12–27 min — Run & Test Locally (Dev Web UI)</h3>
+        <ul>
+            <li><code>./gradlew clean runAdkServer</code> to start AdkWebServer.</li>
+            <li>Open **Dev Web UI** (<code>http://localhost:8080</code>).</li>
+            <li>Create session, run a simple prompt, inspect logs (agent registry, sessions).</li>
+            <li>**Common fixes:** Ensure google-adk & google-adk-dev present, API key set, check schemas.</li>
+        </ul>
+    </div>
+
+    <div class="agenda-item">
+        <h3>27–45 min — Containerize (Docker) & Smoke Test</h3>
+        <ul>
+            <li>Explain **Dockerfile layout**: build stage (Gradle build) → run stage (Temurin JRE 17).</li>
+            <li>Build image: <code>docker build -t adk-ui .</code></li>
+            <li>Run local: <code>docker run --rm -e PORT=8080 -e GOOGLE_API_KEY=$GOOGLE_API_KEY -p 8080:8080 adk-ui</code></li>
+            <li>Verify the Dev Web UI renders and agents load **inside the container**.</li>
+        </ul>
+    </div>
+
+    <div class="agenda-item">
+        <h3>45–58 min — Deploy to Google Cloud Run</h3>
+        <ul>
+            <li>Push image (if using Artifact Registry): <code>docker tag</code> & <code>docker push</code>.</li>
+            <li>**Deploy to Cloud Run:** <code>gcloud run deploy...</code> (cover key flags: <code>--allow-unauthenticated</code>, <code>--memory</code>, <code>--set-env-vars</code>).</li>
+            <li>Health checks & startup probe notes; confirm URL works; create session in UI; tail logs.</li>
+        </ul>
+    </div>
+
+    <div class="agenda-item">
+        <h3>58–60 min — Wrap-Up & Q&A</h3>
+        <ul>
+            <li>**Recap:** local → Docker → Cloud Run.</li>
+            <li>**Next steps:** Dedicated agent module, externalized config, CI/CD with Cloud Build.</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <h2>&#128187; Detailed Hands-On Checklist</h2>
+
+    <div class="prereq">
+        <p><strong>Prerequisites (preinstalled):</strong> Java 17, Gradle (or wrapper), IntelliJ IDEA, Docker Desktop, gcloud CLI (authenticated to project <code>rajiv-ai</code>), Artifact Registry enabled, Cloud Run enabled.</p>
+    </div>
+
+    <h3>1) Clone & Inspect</h3>
+    <div class="code-block">
+        <code>
+git clone https://github.com/rajivksingh13/titli-ai.git<br>
+cd titli-ai/java-ai-agent-adk<br>
+# ensure you're on branch: java-ai-agents-google-adk
+        </code>
+    </div>
+    <p>Skim: <code>build.gradle</code> (ADK deps), Agent classes, <code>runAdkServer</code> task.</p>
+
+    <h3>2) Set API Key Locally</h3>
+    <div class="code-block">
+        <p>// PowerShell:</p>
+        <code>$env:GOOGLE_API_KEY="YOUR_ACTUAL_GEMINI_API_KEY"</code>
+        <p>// bash/zsh:</p>
+        <code>export GOOGLE_API_KEY="YOUR_ACTUAL_GEMINI_API_KEY"</code>
+    </div>
+
+    <h3>3) Run the Dev Web Server Locally</h3>
+    <div class="code-block">
+        <code>./gradlew clean runAdkServer</code>
+    </div>
+    <p>Test <code>http://localhost:8080</code>, create a session, and send a prompt.</p>
+
+    <h3>4) Build & Run Docker</h3>
+    <div class="code-block">
+        <code>
+docker build -t adk-ui .<br>
+docker run --rm -e PORT=8080 -e GOOGLE_API_KEY=$GOOGLE_API_KEY -p 8080:8080 adk-ui
+        </code>
+    </div>
+    <div class="tip">
+        <strong>Tip:</strong> If "Agent registry is empty" in the container, check the <code>--adk.agents.source-dir</code> path in your **Dockerfile's** <code>ENTRYPOINT</code>.
+    </div>
+
+    <h3>5) Push & Deploy to Cloud Run</h3>
+    <div class="code-block">
+        <code>
+# Push Image<br>
+gcloud auth configure-docker us-east1-docker.pkg.dev<br>
+docker tag adk-ui us-east1-docker.pkg.dev/rajiv-ai/containers/adk-ui:workshop<br>
+docker push us-east1-docker.pkg.dev/rajiv-ai/containers/adk-ui:workshop<br><br>
+# Deploy to Cloud Run<br>
+gcloud run deploy learning-assistant \<br>
+  --image us-east1-docker.pkg.dev/rajiv-ai/containers/adk-ui:workshop \<br>
+  --region us-east1 \<br>
+  --allow-unauthenticated \<br>
+  --cpu 1 --memory 1Gi --port 8080 \<br>
+  --set-env-vars GOOGLE_API_KEY=$GOOGLE_API_KEY,GOOGLE_CLOUD_PROJECT=rajiv-ai,GOOGLE_CLOUD_LOCATION=us-east1
+        </code>
+    </div>
+
+    <hr>
+
+    <h2>&#128269; Talking Points & Stretch Goals</h2>
+
+    <h3>Slide-Friendly Talking Points (for instructor)</h3>
+    <ul>
+        <li>**Why Google ADK?** Rapid agent prototyping with Dev Web UI + clean abstractions.</li>
+        <li>**Local → Cloud parity:** Same Java app, just add a container boundary + Cloud Run infra.</li>
+        <li>**Observability:** Readiness/startup probes, log streams, session IDs, HTTP endpoints.</li>
+        <li>**Security:** Keep <code>GOOGLE_API_KEY</code> in Cloud Run env vars / Secret Manager.</li>
+        <li>**Scalability:** Cloud Run autoscaling; concurrency limits.</li>
+    </ul>
+
+    <h3>Stretch Goals (if time allows)</h3>
+    <ul>
+        <li>Swap to Vertex AI via <code>GOOGLE_GENAI_USE_VERTEXAI=TRUE</code> and Service Account auth.</li>
+        <li>Add a simple **Tool (FunctionTool)** and show structured I/O schema validation.</li>
+        <li>Wire a **CI/CD pipeline** (Cloud Build trigger) to build & deploy on push.</li>
+        <li>Externalize agent configs to ConfigMap/Secrets (12-factor).</li>
+    </ul>
+
+</div>
+
+</body>
+</html>
