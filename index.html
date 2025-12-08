@@ -5,32 +5,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workshop Plan: How to Build, Test & Deploy AI Agents using Java and Google ADK</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 20px; background-color: #f4f7f6; }
-        .container { max-width: 900px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h1 { color: #007bff; border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-top: 0; }
-        h2 { color: #28a745; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        h3 { color: #6c757d; margin-top: 20px; font-size: 1.2em; }
-        .meta-info, .recap { background-color: #e9f5ff; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 5px solid #007bff; }
-        .meta-info p { margin: 5px 0; }
-        .agenda-item { margin-bottom: 10px; padding-left: 15px; border-left: 3px solid #28a745; }
-        .code-block { background-color: #272c35; color: #f8f8f2; padding: 10px; border-radius: 4px; overflow-x: auto; margin-top: 5px; font-family: Consolas, 'Courier New', monospace; font-size: 0.9em; }
-        .code-block code { white-space: pre-wrap; }
-        .tip, .prereq { background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 10px; margin: 15px 0; border-radius: 4px; color: #856404; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
+        /* New Color Palette & Typography */
+        :root {
+            --color-primary: #1976D2; /* Deep Blue - for Main Headings/Borders */
+            --color-secondary: #FFB300; /* Amber/Gold - for Accent/Tips */
+            --color-text-dark: #212529;
+            --color-text-medium: #495057;
+            --color-background-light: #F8F9FA; /* Off-white background */
+            --color-highlight-light: #E3F2FD; /* Light Blue for Info Boxes */
+            --color-highlight-warning: #FFFDE7; /* Very light yellow for Tips */
+        }
+
+        body { 
+            font-family: 'Open Sans', Arial, sans-serif; /* Cleaner, modern font */
+            line-height: 1.65; 
+            color: var(--color-text-dark); 
+            margin: 0; 
+            background-color: var(--color-background-light); 
+            padding: 40px 0;
+        }
+
+        .container { 
+            max-width: 960px; /* Slightly wider container */
+            margin: auto; 
+            background: #fff; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Softer, larger shadow */
+        }
+
+        /* Headings */
+        h1 { 
+            color: var(--color-primary); 
+            border-bottom: 4px solid var(--color-primary); 
+            padding-bottom: 15px; 
+            margin-top: 0; 
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+        
+        h2 { 
+            color: var(--color-text-dark); 
+            margin-top: 40px; 
+            border-bottom: 2px dashed #e9ecef; /* Dashed line for subtle division */
+            padding-bottom: 8px; 
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+        
+        h3 { 
+            color: var(--color-text-medium); 
+            margin-top: 25px; 
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        /* Information & Metadata Boxes */
+        .meta-info, .recap { 
+            background-color: var(--color-highlight-light); 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 30px; 
+            border-left: 6px solid var(--color-primary); 
+            font-size: 1.05em;
+        }
+        .meta-info p { 
+            margin: 8px 0; 
+            display: flex; 
+            align-items: center;
+        }
+        /* CSS replacement for <strong> in meta-info */
+        .meta-label {
+            color: var(--color-text-dark);
+            font-weight: 700;
+            min-width: 90px;
+            margin-right: 10px;
+        }
+
+        /* Agenda / Timeline Styling */
+        .agenda-item { 
+            margin-bottom: 25px; 
+            padding-left: 20px; 
+            border-left: 3px solid var(--color-secondary); /* Accent color border */
+            position: relative;
+        }
+        /* Add a subtle circle/dot to mark the item */
+        .agenda-item::before {
+            content: '●';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            color: var(--color-secondary);
+            font-size: 14px;
+        }
+        .agenda-item h3 {
+            margin-top: 0;
+            color: var(--color-secondary);
+        }
+
+        /* Code Blocks */
+        .code-block { 
+            background-color: #272c35; 
+            color: #dcdcdc; 
+            padding: 15px; 
+            border-radius: 6px; 
+            overflow-x: auto; 
+            margin: 15px 0; 
+            font-family: 'Roboto Mono', Consolas, 'Courier New', monospace; 
+            font-size: 0.95em; 
+            border: 1px solid #3d4554;
+            white-space: pre-wrap;
+            word-wrap: break-word; /* Ensure code wraps gracefully */
+        }
+        .code-block code {
+            display: block; /* Ensures consistent formatting inside the block */
+        }
+        .code-block p {
+            color: #90ee90; /* Light green for comments */
+            margin: 0;
+        }
+        .code-block br {
+            line-height: 1.5; /* Spacing between lines of code */
+        }
+
+        /* Tip/Prerequisite Boxes */
+        .tip, .prereq { 
+            background-color: var(--color-highlight-warning); 
+            border-left: 6px solid var(--color-secondary); 
+            padding: 15px; 
+            margin: 20px 0; 
+            border-radius: 6px; 
+            color: #4a4a4a;
+            font-size: 0.95em;
+            box-shadow: 0 2px 5px rgba(255,193,7,0.2);
+        }
+        .prereq .prereq-title { 
+            color: var(--color-text-dark);
+            font-weight: 700; 
+            display: block; 
+            margin-bottom: 5px; 
+        }
+
+        /* Lists */
+        ul { 
+            padding-left: 25px; 
+            list-style: disc; 
+            color: var(--color-text-medium);
+        }
+        li { 
+            margin-bottom: 10px; 
+            color: var(--color-text-dark);
+        }
+        /* CSS replacement for <strong> in list items */
+        .key-term {
+            color: var(--color-primary); 
+            font-weight: 600; /* Subtle emphasis */
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
 
-    <h1>&#129302; Workshop Plan: How to Build, Test & Deploy AI Agents using Java and Google ADK</h1>
+    <h1>&#129302; Workshop Plan: Build, Test & Deploy AI Agents (Java/Google ADK)</h1>
 
     <div class="meta-info">
-        <p><strong>Audience:</strong> Java developers & power users comfortable with command line and Git</p>
-        <p><strong>Duration:</strong> 1 Hour (60 minutes)</p>
-        <p><strong>Format:</strong> 100% hands-on, instructor-led (live coding + follow-along)</p>
-        <p><strong>Repo:</strong> <code>java-ai-agent-adk</code> in branch: <code>java-ai-agents-google-adk</code> (on GitHub)</p>
+        <p><span class="meta-label">Audience:</span> Java developers & power users</p>
+        <p><span class="meta-label">Duration:</span> 1 Hour (60 minutes)</p>
+        <p><span class="meta-label">Format:</span> 100% hands-on, instructor-led</p>
+        <p><span class="meta-label">Repo:</span> <code>java-ai-agent-adk</code> (on GitHub)</p>
     </div>
 
     <h2>&#128302; Agenda at a Glance (60 minutes)</h2>
@@ -38,8 +181,8 @@
     <div class="agenda-item">
         <h3>0–5 min — Kickoff & Architecture Primer</h3>
         <ul>
-            <li>What is **Google ADK (Agent Development Kit)**? Components: Agents, Runner, Dev Web UI, AdkWebServer.</li>
-            <li>**Our Goal:** Run agents locally → containerize → deploy to Cloud Run (with health checks & env vars).</li>
+            <li>What is <span class="key-term">Google ADK (Agent Development Kit)</span>? Components: Agents, Runner, Dev Web UI, AdkWebServer.</li>
+            <li><span class="key-term">Our Goal:</span> Run agents locally → containerize → deploy to Cloud Run (with health checks & env vars).</li>
         </ul>
     </div>
 
@@ -47,8 +190,8 @@
         <h3>5–12 min — Project Setup (Local)</h3>
         <ul>
             <li>Clone repo & open in IntelliJ IDEA.</li>
-            <li>Walk through <code>build.gradle</code> (ADK deps, Spring Boot web starter, Java 17).</li>
-            <li>Verify **JDK 17** and Gradle wrapper, set **GOOGLE_API_KEY** locally (PowerShell / bash).</li>
+            <li>Walk through <code>build.gradle</code> (<span class="key-term">ADK deps</span>, Spring Boot web starter, Java 17).</li>
+            <li>Verify <span class="key-term">JDK 17</span> and Gradle wrapper, set <span class="key-term">GOOGLE_API_KEY</span> locally (PowerShell / bash).</li>
             <li>Quick peek at <code>AdkLLMAgent</code> and <code>AdkWebServer</code>.</li>
         </ul>
     </div>
@@ -57,19 +200,19 @@
         <h3>12–27 min — Run & Test Locally (Dev Web UI)</h3>
         <ul>
             <li><code>./gradlew clean runAdkServer</code> to start AdkWebServer.</li>
-            <li>Open **Dev Web UI** (<code>http://localhost:8080</code>).</li>
+            <li>Open <span class="key-term">Dev Web UI</span> (<code>http://localhost:8080</code>).</li>
             <li>Create session, run a simple prompt, inspect logs (agent registry, sessions).</li>
-            <li>**Common fixes:** Ensure google-adk & google-adk-dev present, API key set, check schemas.</li>
+            <li><span class="key-term">Common fixes:</span> Ensure google-adk & google-adk-dev present, API key set, check schemas.</li>
         </ul>
     </div>
 
     <div class="agenda-item">
         <h3>27–45 min — Containerize (Docker) & Smoke Test</h3>
         <ul>
-            <li>Explain **Dockerfile layout**: build stage (Gradle build) → run stage (Temurin JRE 17).</li>
+            <li>Explain <span class="key-term">Dockerfile layout</span>: build stage (Gradle build) → run stage (Temurin JRE 17).</li>
             <li>Build image: <code>docker build -t adk-ui .</code></li>
             <li>Run local: <code>docker run --rm -e PORT=8080 -e GOOGLE_API_KEY=$GOOGLE_API_KEY -p 8080:8080 adk-ui</code></li>
-            <li>Verify the Dev Web UI renders and agents load **inside the container**.</li>
+            <li>Verify the Dev Web UI renders and agents load <span class="key-term">inside the container</span>.</li>
         </ul>
     </div>
 
@@ -77,7 +220,7 @@
         <h3>45–58 min — Deploy to Google Cloud Run</h3>
         <ul>
             <li>Push image (if using Artifact Registry): <code>docker tag</code> & <code>docker push</code>.</li>
-            <li>**Deploy to Cloud Run:** <code>gcloud run deploy...</code> (cover key flags: <code>--allow-unauthenticated</code>, <code>--memory</code>, <code>--set-env-vars</code>).</li>
+            <li><span class="key-term">Deploy to Cloud Run:</span> <code>gcloud run deploy...</code> (cover key flags: <code>--allow-unauthenticated</code>, <code>--memory</code>, <code>--set-env-vars</code>).</li>
             <li>Health checks & startup probe notes; confirm URL works; create session in UI; tail logs.</li>
         </ul>
     </div>
@@ -85,8 +228,8 @@
     <div class="agenda-item">
         <h3>58–60 min — Wrap-Up & Q&A</h3>
         <ul>
-            <li>**Recap:** local → Docker → Cloud Run.</li>
-            <li>**Next steps:** Dedicated agent module, externalized config, CI/CD with Cloud Build.</li>
+            <li><span class="key-term">Recap:</span> local → Docker → Cloud Run.</li>
+            <li><span class="key-term">Next steps:</span> Dedicated agent module, externalized config, CI/CD with Cloud Build.</li>
         </ul>
     </div>
 
@@ -95,7 +238,8 @@
     <h2>&#128187; Detailed Hands-On Checklist</h2>
 
     <div class="prereq">
-        <p><strong>Prerequisites (preinstalled):</strong> Java 17, Gradle (or wrapper), IntelliJ IDEA, Docker Desktop, gcloud CLI (authenticated to project <code>rajiv-ai</code>), Artifact Registry enabled, Cloud Run enabled.</p>
+        <span class="prereq-title">Prerequisites (preinstalled):</span> 
+        <p>Java 17, Gradle (or wrapper), IntelliJ IDEA, Docker Desktop, gcloud CLI (authenticated to project <code>rajiv-ai</code>), Artifact Registry enabled, Cloud Run enabled.</p>
     </div>
 
     <h3>1) Clone & Inspect</h3>
@@ -130,7 +274,7 @@ docker run --rm -e PORT=8080 -e GOOGLE_API_KEY=$GOOGLE_API_KEY -p 8080:8080 adk-
         </code>
     </div>
     <div class="tip">
-        <strong>Tip:</strong> If "Agent registry is empty" in the container, check the <code>--adk.agents.source-dir</code> path in your **Dockerfile's** <code>ENTRYPOINT</code>.
+        <span class="prereq-title">Tip: Debugging Agents</span> If "Agent registry is empty" in the container, check the <code>--adk.agents.source-dir</code> path in your **Dockerfile's** <code>ENTRYPOINT</code>.
     </div>
 
     <h3>5) Push & Deploy to Cloud Run</h3>
@@ -156,18 +300,18 @@ gcloud run deploy learning-assistant \<br>
 
     <h3>Slide-Friendly Talking Points (for instructor)</h3>
     <ul>
-        <li>**Why Google ADK?** Rapid agent prototyping with Dev Web UI + clean abstractions.</li>
-        <li>**Local → Cloud parity:** Same Java app, just add a container boundary + Cloud Run infra.</li>
-        <li>**Observability:** Readiness/startup probes, log streams, session IDs, HTTP endpoints.</li>
-        <li>**Security:** Keep <code>GOOGLE_API_KEY</code> in Cloud Run env vars / Secret Manager.</li>
-        <li>**Scalability:** Cloud Run autoscaling; concurrency limits.</li>
+        <li><span class="key-term">Why Google ADK?</span> Rapid agent prototyping with Dev Web UI + clean abstractions.</li>
+        <li><span class="key-term">Local → Cloud parity:</span> Same Java app, just add a container boundary + Cloud Run infra.</li>
+        <li><span class="key-term">Observability:</span> Readiness/startup probes, log streams, session IDs, HTTP endpoints.</li>
+        <li><span class="key-term">Security:</span> Keep <code>GOOGLE_API_KEY</code> in Cloud Run env vars / Secret Manager.</li>
+        <li><span class="key-term">Scalability:</span> Cloud Run autoscaling; concurrency limits.</li>
     </ul>
 
     <h3>Stretch Goals (if time allows)</h3>
     <ul>
         <li>Swap to Vertex AI via <code>GOOGLE_GENAI_USE_VERTEXAI=TRUE</code> and Service Account auth.</li>
-        <li>Add a simple **Tool (FunctionTool)** and show structured I/O schema validation.</li>
-        <li>Wire a **CI/CD pipeline** (Cloud Build trigger) to build & deploy on push.</li>
+        <li>Add a simple <span class="key-term">Tool (FunctionTool)</span> and show structured I/O schema validation.</li>
+        <li>Wire a <span class="key-term">CI/CD pipeline</span> (Cloud Build trigger) to build & deploy on push.</li>
         <li>Externalize agent configs to ConfigMap/Secrets (12-factor).</li>
     </ul>
 
