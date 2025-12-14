@@ -3,55 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Incorrect Generative AI Concepts - Review Summary</title>
+  <title>Generative AI – Incorrect vs Correct Technical Concepts</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.6; }
-    h1 { color: #333; }
-    h2 { margin-top: 35px; color: #b30000; }
-    ul { margin-top: 8px; }
-    .incorrect { color: #b30000; font-weight: bold; }
+    body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.65; color:#222; }
+    h1 { color: #2c3e50; }
+    h2 { color: #b30000; margin-top: 40px; }
+    .correct { color:#006600; }
+    .example { background:#f4f4f4; padding:12px; border-left:4px solid #666; margin-top:10px; }
+    ul { margin-top:7px; }
   </style>
 </head>
 <body>
 
-  <h1>Generative AI Technical Review – Incorrect vs Correct Definitions</h1>
+  <h1>Generative AI – Incorrect vs Correct Technical Concepts</h1>
+  <p>This document highlights explanations that were technically incorrect and provides accurate definitions with simple, clear examples.</p>
 
+
+  <!-- RAG -->
   <h2>1. Retrieval-Augmented Generation (RAG)</h2>
+
+  <p><strong style="color:#b30000;">Incorrect Explanation:</strong></p>
   <ul>
-    <li><span class="incorrect">Incorrect Acronym:</span> RAG was expanded as “brick table augmented generation.”</li>
-    <li><span class="incorrect">Incorrect Architecture Placement:</span> RAG described as running on the front end to “process your prompt” rather than on the backend for retrieval and grounding.</li>
+    <li>Misinterpreted as “brick table augmented generation.”</li>
+    <li>Described as a frontend mechanism used to process or improve prompts.</li>
   </ul>
 
+  <p class="correct"><strong>Correct Definition:</strong></p>
+  <p>RAG is a backend architecture that retrieves relevant information from a vector database and augments a user prompt with real knowledge before sending it to an LLM. This improves factual accuracy and reduces hallucination.</p>
+
+  <div class="example"><strong>Example:</strong><br>
+    Query: “What is Google’s 2023 leave policy?”<br>
+    The system retrieves the policy text from internal documents → attaches it to the prompt → LLM produces a grounded answer.
+  </div>
+
+
+
+  <!-- LLM -->
   <h2>2. Large Language Models (LLMs)</h2>
+
+  <p><strong style="color:#b30000;">Incorrect Explanation:</strong></p>
   <ul>
-    <li><span class="incorrect">Incorrect Definition:</span> LLM described as “a kind of data trained on a particular set of text data format.”</li>
-    <li><span class="incorrect">Incorrect Classification:</span> Claimed that different LLMs are needed for image generation, video generation, etc.</li>
+    <li>Described as “a kind of data trained on a particular text format.”</li>
+    <li>Claimed that different LLMs must be used for images, videos, etc.</li>
   </ul>
 
+  <p class="correct"><strong>Correct Definition:</strong></p>
+  <p>LLMs are Transformer-based neural networks trained on massive text corpora. They generate text by predicting the next token. They do not generate images or videos; separate diffusion models handle those tasks.</p>
+
+  <div class="example"><strong>Example:</strong><br>
+    Prompt: “Explain Newton’s First Law.” → The LLM generates a text explanation.
+  </div>
+
+
+
+  <!-- LoRA -->
   <h2>3. Low-Rank Adaptation (LoRA)</h2>
+
+  <p><strong style="color:#b30000;">Incorrect Explanation:</strong></p>
   <ul>
-    <li><span class="incorrect">Incorrect Definition:</span> LoRA described as ranking/sorting multiple outputs (e.g., weather responses) and selecting the “best” output.</li>
+    <li>Defined as a mechanism that ranks or sorts multiple outputs (e.g., weather results).</li>
   </ul>
 
+  <p class="correct"><strong>Correct Definition:</strong></p>
+  <p>LoRA is a parameter-efficient fine-tuning method that adds small low-rank matrices to a model, enabling low-cost customization without retraining the entire network.</p>
+
+  <div class="example"><strong>Example:</strong><br>
+    Fine-tuning a base LLM using LoRA to become a domain-specific medical assistant by training only 1–2% additional parameters.
+  </div>
+
+
+
+  <!-- ICL -->
   <h2>4. In-Context Learning (ICL)</h2>
+
+  <p><strong style="color:#b30000;">Incorrect Explanation:</strong></p>
   <ul>
-    <li><span class="incorrect">Misdefinition:</span> Explained as a tool for backend teams “to understand user requirements,” instead of an inference-time model behavior.</li>
+    <li>Explained as a backend-team feature used to better understand user needs.</li>
+    <li>Implied that models learn permanently from prompts.</li>
   </ul>
 
+  <p class="correct"><strong>Correct Definition:</strong></p>
+  <p>ICL is the model’s ability to interpret examples provided directly inside the prompt, without updating any internal weights. This learning is temporary and lasts only for the duration of the conversation.</p>
+
+  <div class="example"><strong>Example:</strong><br>
+    “Hola → Hello, Gracias → Thank you. Translate: Adiós →” → The model answers “Goodbye” by recognizing the pattern.
+  </div>
+
+
+
+  <!-- Image generation -->
   <h2>5. Image Generation Mechanism</h2>
+
+  <p><strong style="color:#b30000;">Incorrect Explanation:</strong></p>
   <ul>
-    <li><span class="incorrect">Incorrect Explanation:</span> Image generation described as “a vector embedding rendered on your front end.”</li>
+    <li>Described as “a vector embedding rendered on your front end.”</li>
   </ul>
 
+  <p class="correct"><strong>Correct Definition:</strong></p>
+  <p>Modern image models (e.g., Stable Diffusion, DALL·E 3) use diffusion or GAN-based architectures. The prompt creates embeddings that guide the multi-step denoising process which results in a final coherent image.</p>
+
+  <div class="example"><strong>Example:</strong><br>
+    Prompt: “A watercolor painting of an astronaut in a forest.” → Diffusion model generates the artwork through iterative refinement of noise.
+  </div>
+
+
+
+  <!-- Fine tuning -->
   <h2>6. Fine-Tuning</h2>
+
+  <p><strong style="color:#b30000;">Incorrect Explanation:</strong></p>
   <ul>
-    <li><span class="incorrect">Incorrect Analogy:</span> Compared to customizing Python libraries like NumPy/Pandas instead of weight updates on a model.</li>
+    <li>Compared to customizing Python libraries such as NumPy or Pandas.</li>
   </ul>
 
+  <p class="correct"><strong>Correct Definition:</strong></p>
+  <p>Fine-tuning updates a pre-trained model’s internal weights using domain-specific data. This requires GPU training, datasets, and gradient-based optimization.</p>
+
+  <div class="example"><strong>Example:</strong><br>
+    Fine-tuning a general LLM on 30,000 HR documents to build an accurate HR-policy chatbot.
+  </div>
+
+
+
+  <!-- Tokens -->
   <h2>7. Tokens</h2>
+
+  <p><strong style="color:#b30000;">Incorrect Explanation:</strong></p>
   <ul>
-    <li><span class="incorrect">Incorrect Purpose:</span> Defined as managing backend queries or tracking usage instead of being text units used for model processing.</li>
+    <li>Defined as mechanisms for tracking usage or managing queries.</li>
   </ul>
+
+  <p class="correct"><strong>Correct Definition:</strong></p>
+  <p>Tokens are the smallest units of text (words, subwords, punctuation) processed by an LLM. They determine cost, latency, and how much context the model can handle.</p>
+
+  <div class="example"><strong>Example:</strong><br>
+    The sentence “AI is powerful.” may be split into tokens like “AI”, “ is”, “ powerful”, “.” depending on the tokenizer used.
+  </div>
+
 
 </body>
 </html>
