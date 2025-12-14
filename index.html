@@ -1,323 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workshop Plan: How to Build, Test & Deploy AI Agents using Java and Google ADK</title>
-    <style>
-        /* New Color Palette & Typography */
-        :root {
-            --color-primary: #1976D2; /* Deep Blue - for Main Headings/Borders */
-            --color-secondary: #FFB300; /* Amber/Gold - for Accent/Tips */
-            --color-text-dark: #212529;
-            --color-text-medium: #495057;
-            --color-background-light: #F8F9FA; /* Off-white background */
-            --color-highlight-light: #E3F2FD; /* Light Blue for Info Boxes */
-            --color-highlight-warning: #FFFDE7; /* Very light yellow for Tips */
-        }
-
-        body { 
-            font-family: 'Open Sans', Arial, sans-serif; /* Cleaner, modern font */
-            line-height: 1.65; 
-            color: var(--color-text-dark); 
-            margin: 0; 
-            background-color: var(--color-background-light); 
-            padding: 40px 0;
-        }
-
-        .container { 
-            max-width: 960px; /* Slightly wider container */
-            margin: auto; 
-            background: #fff; 
-            padding: 40px; 
-            border-radius: 12px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Softer, larger shadow */
-        }
-
-        /* Headings */
-        h1 { 
-            color: var(--color-primary); 
-            border-bottom: 4px solid var(--color-primary); 
-            padding-bottom: 15px; 
-            margin-top: 0; 
-            font-size: 2.2em;
-            font-weight: 700;
-        }
-        
-        h2 { 
-            color: var(--color-text-dark); 
-            margin-top: 40px; 
-            border-bottom: 2px dashed #e9ecef; /* Dashed line for subtle division */
-            padding-bottom: 8px; 
-            font-size: 1.8em;
-            font-weight: 600;
-        }
-        
-        h3 { 
-            color: var(--color-text-medium); 
-            margin-top: 25px; 
-            font-size: 1.3em;
-            font-weight: 600;
-        }
-
-        /* Information & Metadata Boxes */
-        .meta-info, .recap { 
-            background-color: var(--color-highlight-light); 
-            padding: 20px; 
-            border-radius: 8px; 
-            margin-bottom: 30px; 
-            border-left: 6px solid var(--color-primary); 
-            font-size: 1.05em;
-        }
-        .meta-info p { 
-            margin: 8px 0; 
-            display: flex; 
-            align-items: center;
-        }
-        /* CSS replacement for <strong> in meta-info */
-        .meta-label {
-            color: var(--color-text-dark);
-            font-weight: 700;
-            min-width: 90px;
-            margin-right: 10px;
-        }
-
-        /* Agenda / Timeline Styling */
-        .agenda-item { 
-            margin-bottom: 25px; 
-            padding-left: 20px; 
-            border-left: 3px solid var(--color-secondary); /* Accent color border */
-            position: relative;
-        }
-        /* Add a subtle circle/dot to mark the item */
-        .agenda-item::before {
-            content: '●';
-            position: absolute;
-            left: -8px;
-            top: 5px;
-            color: var(--color-secondary);
-            font-size: 14px;
-        }
-        .agenda-item h3 {
-            margin-top: 0;
-            color: var(--color-secondary);
-        }
-
-        /* Code Blocks */
-        .code-block { 
-            background-color: #272c35; 
-            color: #dcdcdc; 
-            padding: 15px; 
-            border-radius: 6px; 
-            overflow-x: auto; 
-            margin: 15px 0; 
-            font-family: 'Roboto Mono', Consolas, 'Courier New', monospace; 
-            font-size: 0.95em; 
-            border: 1px solid #3d4554;
-            white-space: pre-wrap;
-            word-wrap: break-word; /* Ensure code wraps gracefully */
-        }
-        .code-block code {
-            display: block; /* Ensures consistent formatting inside the block */
-        }
-        .code-block p {
-            color: #90ee90; /* Light green for comments */
-            margin: 0;
-        }
-        .code-block br {
-            line-height: 1.5; /* Spacing between lines of code */
-        }
-
-        /* Tip/Prerequisite Boxes */
-        .tip, .prereq { 
-            background-color: var(--color-highlight-warning); 
-            border-left: 6px solid var(--color-secondary); 
-            padding: 15px; 
-            margin: 20px 0; 
-            border-radius: 6px; 
-            color: #4a4a4a;
-            font-size: 0.95em;
-            box-shadow: 0 2px 5px rgba(255,193,7,0.2);
-        }
-        .prereq .prereq-title { 
-            color: var(--color-text-dark);
-            font-weight: 700; 
-            display: block; 
-            margin-bottom: 5px; 
-        }
-
-        /* Lists */
-        ul { 
-            padding-left: 25px; 
-            list-style: disc; 
-            color: var(--color-text-medium);
-        }
-        li { 
-            margin-bottom: 10px; 
-            color: var(--color-text-dark);
-        }
-        /* CSS replacement for <strong> in list items */
-        .key-term {
-            color: var(--color-primary); 
-            font-weight: 600; /* Subtle emphasis */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generative AI Technical Review</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+    h1, h2, h3 { color: #333; }
+    .incorrect { color: #b30000; font-weight: bold; }
+    .correct { color: #006600; font-weight: bold; }
+    .example { background: #f4f4f4; padding: 10px; border-left: 4px solid #666; }
+    ul { margin-top: 5px; }
+    .section { margin-bottom: 40px; }
+  </style>
 </head>
 <body>
+  <h1>Combined & Polished Master Document</h1>
+  <p><strong>Incorrect or Partially Correct Statements vs Correct Definitions (with Examples)</strong></p>
 
-<div class="container">
-
-    <h1>&#129302; Workshop Plan: Build, Test & Deploy AI Agents (Java/Google ADK)</h1>
-
-    <div class="meta-info">
-        <p><span class="meta-label">Audience:</span> Java developers & power users</p>
-        <p><span class="meta-label">Duration:</span> 1 Hour (60 minutes)</p>
-        <p><span class="meta-label">Format:</span> 100% hands-on, instructor-led</p>
-        <p><span class="meta-label">Repo:</span> <code>java-ai-agent-adk</code> (on GitHub)</p>
-    </div>
-
-    <h2>&#128302; Agenda at a Glance (60 minutes)</h2>
-
-    <div class="agenda-item">
-        <h3>0–5 min — Kickoff & Architecture Primer</h3>
-        <ul>
-            <li>What is <span class="key-term">Google ADK (Agent Development Kit)</span>? Components: Agents, Runner, Dev Web UI, AdkWebServer.</li>
-            <li><span class="key-term">Our Goal:</span> Run agents locally → containerize → deploy to Cloud Run (with health checks & env vars).</li>
-        </ul>
-    </div>
-
-    <div class="agenda-item">
-        <h3>5–12 min — Project Setup (Local)</h3>
-        <ul>
-            <li>Clone repo & open in IntelliJ IDEA.</li>
-            <li>Walk through <code>build.gradle</code> (<span class="key-term">ADK deps</span>, Spring Boot web starter, Java 17).</li>
-            <li>Verify <span class="key-term">JDK 17</span> and Gradle wrapper, set <span class="key-term">GOOGLE_API_KEY</span> locally (PowerShell / bash).</li>
-            <li>Quick peek at <code>AdkLLMAgent</code> and <code>AdkWebServer</code>.</li>
-        </ul>
-    </div>
-
-    <div class="agenda-item">
-        <h3>12–27 min — Run & Test Locally (Dev Web UI)</h3>
-        <ul>
-            <li><code>./gradlew clean runAdkServer</code> to start AdkWebServer.</li>
-            <li>Open <span class="key-term">Dev Web UI</span> (<code>http://localhost:8080</code>).</li>
-            <li>Create session, run a simple prompt, inspect logs (agent registry, sessions).</li>
-            <li><span class="key-term">Common fixes:</span> Ensure google-adk & google-adk-dev present, API key set, check schemas.</li>
-        </ul>
-    </div>
-
-    <div class="agenda-item">
-        <h3>27–45 min — Containerize (Docker) & Smoke Test</h3>
-        <ul>
-            <li>Explain <span class="key-term">Dockerfile layout</span>: build stage (Gradle build) → run stage (Temurin JRE 17).</li>
-            <li>Build image: <code>docker build -t adk-ui .</code></li>
-            <li>Run local: <code>docker run --rm -e PORT=8080 -e GOOGLE_API_KEY=$GOOGLE_API_KEY -p 8080:8080 adk-ui</code></li>
-            <li>Verify the Dev Web UI renders and agents load <span class="key-term">inside the container</span>.</li>
-        </ul>
-    </div>
-
-    <div class="agenda-item">
-        <h3>45–58 min — Deploy to Google Cloud Run</h3>
-        <ul>
-            <li>Push image (if using Artifact Registry): <code>docker tag</code> & <code>docker push</code>.</li>
-            <li><span class="key-term">Deploy to Cloud Run:</span> <code>gcloud run deploy...</code> (cover key flags: <code>--allow-unauthenticated</code>, <code>--memory</code>, <code>--set-env-vars</code>).</li>
-            <li>Health checks & startup probe notes; confirm URL works; create session in UI; tail logs.</li>
-        </ul>
-    </div>
-
-    <div class="agenda-item">
-        <h3>58–60 min — Wrap-Up & Q&A</h3>
-        <ul>
-            <li><span class="key-term">Recap:</span> local → Docker → Cloud Run.</li>
-            <li><span class="key-term">Next steps:</span> Dedicated agent module, externalized config, CI/CD with Cloud Build.</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <h2>&#128187; Detailed Hands-On Checklist</h2>
-
-    <div class="prereq">
-        <span class="prereq-title">Prerequisites (preinstalled):</span> 
-        <p>Java 17, Gradle (or wrapper), IntelliJ IDEA, Docker Desktop, gcloud CLI (authenticated to project <code>rajiv-ai</code>), Artifact Registry enabled, Cloud Run enabled.</p>
-    </div>
-
-    <h3>1) Clone & Inspect</h3>
-    <div class="code-block">
-        <code>
-git clone https://github.com/rajivksingh13/titli-ai.git<br>
-cd titli-ai/java-ai-agent-adk<br>
-# ensure you're on branch: java-ai-agents-google-adk
-        </code>
-    </div>
-    <p>Skim: <code>build.gradle</code> (ADK deps), Agent classes, <code>runAdkServer</code> task.</p>
-
-    <h3>2) Set API Key Locally</h3>
-    <div class="code-block">
-        <p>// PowerShell:</p>
-        <code>$env:GOOGLE_API_KEY="YOUR_ACTUAL_GEMINI_API_KEY"</code>
-        <p>// bash/zsh:</p>
-        <code>export GOOGLE_API_KEY="YOUR_ACTUAL_GEMINI_API_KEY"</code>
-    </div>
-
-    <h3>3) Run the Dev Web Server Locally</h3>
-    <div class="code-block">
-        <code>./gradlew clean runAdkServer</code>
-    </div>
-    <p>Test <code>http://localhost:8080</code>, create a session, and send a prompt.</p>
-
-    <h3>4) Build & Run Docker</h3>
-    <div class="code-block">
-        <code>
-docker build -t adk-ui .<br>
-docker run --rm -e PORT=8080 -e GOOGLE_API_KEY=$GOOGLE_API_KEY -p 8080:8080 adk-ui
-        </code>
-    </div>
-    <div class="tip">
-        <span class="prereq-title">Tip: Debugging Agents</span> If "Agent registry is empty" in the container, check the <code>--adk.agents.source-dir</code> path in your **Dockerfile's** <code>ENTRYPOINT</code>.
-    </div>
-
-    <h3>5) Push & Deploy to Cloud Run</h3>
-    <div class="code-block">
-        <code>
-# Push Image<br>
-gcloud auth configure-docker us-east1-docker.pkg.dev<br>
-docker tag adk-ui us-east1-docker.pkg.dev/rajiv-ai/containers/adk-ui:workshop<br>
-docker push us-east1-docker.pkg.dev/rajiv-ai/containers/adk-ui:workshop<br><br>
-# Deploy to Cloud Run<br>
-gcloud run deploy learning-assistant \<br>
-  --image us-east1-docker.pkg.dev/rajiv-ai/containers/adk-ui:workshop \<br>
-  --region us-east1 \<br>
-  --allow-unauthenticated \<br>
-  --cpu 1 --memory 1Gi --port 8080 \<br>
-  --set-env-vars GOOGLE_API_KEY=$GOOGLE_API_KEY,GOOGLE_CLOUD_PROJECT=rajiv-ai,GOOGLE_CLOUD_LOCATION=us-east1
-        </code>
-    </div>
-
-    <hr>
-
-    <h2>&#128269; Talking Points & Stretch Goals</h2>
-
-    <h3>Slide-Friendly Talking Points</h3>
+  <div class="section">
+    <h2>1. Generative AI – Vague or Missing Definition</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
     <ul>
-        <li><span class="key-term">Why Google ADK?</span> Rapid agent prototyping with Dev Web UI + clean abstractions.</li>
-        <li><span class="key-term">Local → Cloud parity:</span> Same Java app, just add a container boundary + Cloud Run infra.</li>
-        <li><span class="key-term">Observability:</span> Readiness/startup probes, log streams, session IDs, HTTP endpoints.</li>
-        <li><span class="key-term">Security:</span> Keep <code>GOOGLE_API_KEY</code> in Cloud Run env vars / Secret Manager.</li>
-        <li><span class="key-term">Scalability:</span> Cloud Run autoscaling; concurrency limits.</li>
-        <li><span class="key-term">Real World Use Cases:</span> Real World Use Cases and System Design with GenAI Capabilities.</li>
+      <li>Generative AI was not clearly defined.</li>
+      <li>Focused on “building cool stuff” and “using prompts.”</li>
+      <li>Did not explain what makes a system generative.</li>
     </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>Generative AI refers to neural network models designed to generate new content such as text, images, audio, video, and code. They learn probability distributions from vast datasets and generate outputs by predicting likely next tokens, pixel structures, or frame sequences.</p>
+    <div class="example"><strong>Simple Example:</strong> A model trained on millions of recipes can generate a new recipe following patterns it learned.</div>
+  </div>
 
-    <h3>Stretch Goals (if time allows)</h3>
+  <div class="section">
+    <h2>2. LLM (Large Language Model) – Misdefined or Oversimplified</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
     <ul>
-        <li>Swap to Vertex AI via <code>GOOGLE_GENAI_USE_VERTEXAI=TRUE</code> and Service Account auth.</li>
-        <li>Add a simple <span class="key-term">Tool (FunctionTool)</span> and show structured I/O schema validation.</li>
-        <li>Wire a <span class="key-term">CI/CD pipeline</span> (Cloud Build trigger) to build & deploy on push.</li>
-        <li>Externalize agent configs to ConfigMap/Secrets (12-factor).</li>
+      <li>LLMs are “trained to query on top of your questions.”</li>
+      <li>Suggests LLMs learn from real-time user queries.</li>
+      <li>Confuses LLMs with image/video generative models.</li>
     </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>LLMs are Transformer-based neural networks pre-trained on vast text corpora. They do not learn from individual prompts. They generate text by predicting the most likely next token.</p>
+    <div class="example"><strong>Simple Example:</strong> Input: “Once upon a…” → Output: “time,” “night,” “dream.”</div>
+  </div>
 
-</div>
+  <div class="section">
+    <h2>3. Misrepresentation of RAG (Retrieval-Augmented Generation)</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
+    <ul>
+      <li>Described as “brick table augmented generation.”</li>
+      <li>Positioned as a frontend prompt processor.</li>
+      <li>Vague explanation of retrieval and grounding.</li>
+    </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>RAG is a backend architecture pattern. It retrieves relevant documents from a vector database, augments the user prompt, and produces grounded, accurate outputs using the LLM.</p>
+    <div class="example"><strong>Simple Example:</strong> Query: “What is ABC Company’s refund policy?” → System retrieves the policy and sends it with the prompt to the LLM.</div>
+    <div class="example"><strong>Analogy:</strong> LLM = customer representative; retriever = assistant who fetches documents from the back office.</div>
+  </div>
+
+  <div class="section">
+    <h2>4. LoRA (Low-Rank Adaptation) – Completely Misunderstood</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
+    <ul>
+      <li>Described as an output ranking/selection mechanism.</li>
+      <li>Incorrectly connected to weather prediction ranking.</li>
+    </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>LoRA is a Parameter-Efficient Fine-Tuning (PEFT) method. It adapts large models by training small low-rank matrices, not by ranking outputs.</p>
+    <div class="example"><strong>Simple Example:</strong> Fine-tune an LLM for legal analysis or medical summarization using only ~1–2% new parameters.</div>
+  </div>
+
+  <div class="section">
+    <h2>5. Vector Embeddings and Vector Databases – Confused Concepts</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
+    <ul>
+      <li>Claims vector DBs store raw images/screenshots.</li>
+      <li>Embeddings equated to vector DB functionality.</li>
+    </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>Embeddings are numerical representations of text, images, or audio. Vector databases store these embeddings and perform similarity search.</p>
+    <div class="example"><strong>Simple Example:</strong> Query: “dog wearing sunglasses” → Convert query to embeddings → Compare with stored embeddings → Return closest results.</div>
+  </div>
+
+  <div class="section">
+    <h2>6. Tokens – Misdefined Purpose</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
+    <ul>
+      <li>Tokens described as managing service queries.</li>
+      <li>Confused with usage tracking mechanisms.</li>
+    </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>A token is a unit of text the LLM processes. Tokens affect cost, speed, and context window size. They do not manage queries.</p>
+    <div class="example"><strong>Simple Example:</strong> “Elephant” → 2 tokens (“ele”, “phant”), “AI” → 1 token.</div>
+  </div>
+
+  <div class="section">
+    <h2>7. Hallucinations – Incorrect Explanation</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
+    <ul>
+      <li>Incorrect numeric example unrelated to hallucinations.</li>
+      <li>Suggested hallucinations come from misunderstanding inputs.</li>
+    </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>Hallucinations occur when an LLM produces confident but factually incorrect or fabricated information due to statistical prediction, not user input misunderstanding.</p>
+    <div class="example"><strong>Simple Example:</strong> “Who won the 2027 World Cup?” → Model answers with made-up results.</div>
+  </div>
+
+  <div class="section">
+    <h2>8. Fine-Tuning – Incorrect Analogy</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
+    <ul>
+      <li>Compared to customizing Python libraries.</li>
+      <li>Treated as configuration rather than model training.</li>
+    </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>Fine-tuning modifies a pre-trained model's internal weights using domain-specific datasets. This requires GPUs, training loops, and labeled data.</p>
+    <div class="example"><strong>Simple Example:</strong> Fine-tune a base LLM to become a legal assistant or bilingual translator.</div>
+  </div>
+
+  <div class="section">
+    <h2>9. In-Context Learning (ICL) – Misunderstood</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
+    <ul>
+      <li>Framed as backend teams learning user behavior.</li>
+      <li>Incorrectly implies permanent learning from queries.</li>
+    </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>ICL allows an LLM to learn from examples inside a prompt during inference. No weights are updated; learning is temporary.</p>
+    <div class="example"><strong>Simple Example:</strong> Provide translation pairs → model infers pattern → translates new text.</div>
+  </div>
+
+  <div class="section">
+    <h2>10. Image Generation – Oversimplified and Incorrect</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
+    <ul>
+      <li>Described as embedding rendering in frontend.</li>
+      <li>Misses role of diffusion/GAN architectures.</li>
+    </ul>
+    <p class="correct">✅ Correct Definition:</p>
+    <p>Image generation uses diffusion models, GANs, or decoders. Embeddings guide generation; the frontend only displays the final output.</p>
+    <div class="example"><strong>Simple Example:</strong> Blueprint = prompt; Construction = diffusion; Finished house = final image.</div>
+  </div>
+
+  <div class="section">
+    <h2>11. Misplacement of RAG, Vector DB, and Prompting in Architecture</h2>
+    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
+    <ul>
+      <li>RAG, vector DB, and retrieval placed in frontend.</li>
+      <li>Prompting treated as a hallucination fix.</li>
+    </ul>
+    <p class="correct">✅ Correct Architecture:</p>
+    <table border="1" cellpadding="8" cellspacing="0">
+      <tr><th>Layer</th><th>Responsible For</th></tr>
+      <tr><td>Frontend</td><td>UI, forms, displaying responses</td></tr>
+      <tr><td>Backend</td><td>APIs, RAG, retrieval, vector DB lookups</td></tr>
+      <tr><td>Model Layer</td><td>LLM inference, embeddings, fine-tuning</td></tr>
+    </table>
+    <p>Prompting can reduce hallucinations but cannot eliminate them. RAG provides true grounding.</p>
+  </div>
+
+  <div class="section">
+    <h2>12. Overall Pattern of Issues</h2>
+    <p>The training session contained several technical inaccuracies:</p>
+    <ul>
+      <li>Confusion between training and inference</li>
+      <li>Incorrect placement of RAG, LoRA, embeddings, tokens</li>
+      <li>Misunderstanding of LLM usage</li>
+      <li>Oversimplified or incorrect analogies</li>
+      <li>Inaccurate mental models of generative AI systems</li>
+    </ul>
+    <p>These issues may lead students to misunderstand modern AI concepts and struggle with real-world implementations.</p>
+  </div>
 
 </body>
 </html>
-
