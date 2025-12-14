@@ -3,173 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generative AI Technical Review</title>
+  <title>Incorrect Generative AI Concepts - Review Summary</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
-    h1, h2, h3 { color: #333; }
+    body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.6; }
+    h1 { color: #333; }
+    h2 { margin-top: 35px; color: #b30000; }
+    ul { margin-top: 8px; }
     .incorrect { color: #b30000; font-weight: bold; }
-    .correct { color: #006600; font-weight: bold; }
-    .example { background: #f4f4f4; padding: 10px; border-left: 4px solid #666; }
-    ul { margin-top: 5px; }
-    .section { margin-bottom: 40px; }
   </style>
 </head>
 <body>
+
   <h1>Generative AI Technical Review – Incorrect vs Correct Definitions</h1>
 
-  <div class="section">
-    <h2>1. Generative AI – Vague or Missing Definition</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>Generative AI was not clearly defined.</li>
-      <li>Focused on “building cool stuff” and “using prompts.”</li>
-      <li>Did not explain what makes a system generative.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>Generative AI refers to neural network models designed to generate new content such as text, images, audio, video, and code. They learn probability distributions from vast datasets and generate outputs by predicting likely next tokens, pixel structures, or frame sequences.</p>
-    <div class="example"><strong>Simple Example:</strong> A model trained on millions of recipes can generate a new recipe following patterns it learned.</div>
-  </div>
+  <h2>1. Retrieval-Augmented Generation (RAG)</h2>
+  <ul>
+    <li><span class="incorrect">Incorrect Acronym:</span> RAG was expanded as “brick table augmented generation.”</li>
+    <li><span class="incorrect">Incorrect Architecture Placement:</span> RAG described as running on the front end to “process your prompt” rather than on the backend for retrieval and grounding.</li>
+  </ul>
 
-  <div class="section">
-    <h2>2. LLM (Large Language Model) – Misdefined or Oversimplified</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>LLMs are “trained to query on top of your questions.”</li>
-      <li>Suggests LLMs learn from real-time user queries.</li>
-      <li>Confuses LLMs with image/video generative models.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>LLMs are Transformer-based neural networks pre-trained on vast text corpora. They do not learn from individual prompts. They generate text by predicting the most likely next token.</p>
-    <div class="example"><strong>Simple Example:</strong> Input: “Once upon a…” → Output: “time,” “night,” “dream.”</div>
-  </div>
+  <h2>2. Large Language Models (LLMs)</h2>
+  <ul>
+    <li><span class="incorrect">Incorrect Definition:</span> LLM described as “a kind of data trained on a particular set of text data format.”</li>
+    <li><span class="incorrect">Incorrect Classification:</span> Claimed that different LLMs are needed for image generation, video generation, etc.</li>
+  </ul>
 
-  <div class="section">
-    <h2>3. Misrepresentation of RAG (Retrieval-Augmented Generation)</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>Described as “brick table augmented generation.”</li>
-      <li>Positioned as a frontend prompt processor.</li>
-      <li>Vague explanation of retrieval and grounding.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>RAG is a backend architecture pattern. It retrieves relevant documents from a vector database, augments the user prompt, and produces grounded, accurate outputs using the LLM.</p>
-    <div class="example"><strong>Simple Example:</strong> Query: “What is ABC Company’s refund policy?” → System retrieves the policy and sends it with the prompt to the LLM.</div>
-    <div class="example"><strong>Analogy:</strong> LLM = customer representative; retriever = assistant who fetches documents from the back office.</div>
-  </div>
+  <h2>3. Low-Rank Adaptation (LoRA)</h2>
+  <ul>
+    <li><span class="incorrect">Incorrect Definition:</span> LoRA described as ranking/sorting multiple outputs (e.g., weather responses) and selecting the “best” output.</li>
+  </ul>
 
-  <div class="section">
-    <h2>4. LoRA (Low-Rank Adaptation) – Completely Misunderstood</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>Described as an output ranking/selection mechanism.</li>
-      <li>Incorrectly connected to weather prediction ranking.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>LoRA is a Parameter-Efficient Fine-Tuning (PEFT) method. It adapts large models by training small low-rank matrices, not by ranking outputs.</p>
-    <div class="example"><strong>Simple Example:</strong> Fine-tune an LLM for legal analysis or medical summarization using only ~1–2% new parameters.</div>
-  </div>
+  <h2>4. In-Context Learning (ICL)</h2>
+  <ul>
+    <li><span class="incorrect">Misdefinition:</span> Explained as a tool for backend teams “to understand user requirements,” instead of an inference-time model behavior.</li>
+  </ul>
 
-  <div class="section">
-    <h2>5. Vector Embeddings and Vector Databases – Confused Concepts</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>Claims vector DBs store raw images/screenshots.</li>
-      <li>Embeddings equated to vector DB functionality.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>Embeddings are numerical representations of text, images, or audio. Vector databases store these embeddings and perform similarity search.</p>
-    <div class="example"><strong>Simple Example:</strong> Query: “dog wearing sunglasses” → Convert query to embeddings → Compare with stored embeddings → Return closest results.</div>
-  </div>
+  <h2>5. Image Generation Mechanism</h2>
+  <ul>
+    <li><span class="incorrect">Incorrect Explanation:</span> Image generation described as “a vector embedding rendered on your front end.”</li>
+  </ul>
 
-  <div class="section">
-    <h2>6. Tokens – Misdefined Purpose</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>Tokens described as managing service queries.</li>
-      <li>Confused with usage tracking mechanisms.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>A token is a unit of text the LLM processes. Tokens affect cost, speed, and context window size. They do not manage queries.</p>
-    <div class="example"><strong>Simple Example:</strong> “Elephant” → 2 tokens (“ele”, “phant”), “AI” → 1 token.</div>
-  </div>
+  <h2>6. Fine-Tuning</h2>
+  <ul>
+    <li><span class="incorrect">Incorrect Analogy:</span> Compared to customizing Python libraries like NumPy/Pandas instead of weight updates on a model.</li>
+  </ul>
 
-  <div class="section">
-    <h2>7. Hallucinations – Incorrect Explanation</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>Incorrect numeric example unrelated to hallucinations.</li>
-      <li>Suggested hallucinations come from misunderstanding inputs.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>Hallucinations occur when an LLM produces confident but factually incorrect or fabricated information due to statistical prediction, not user input misunderstanding.</p>
-    <div class="example"><strong>Simple Example:</strong> “Who won the 2027 World Cup?” → Model answers with made-up results.</div>
-  </div>
-
-  <div class="section">
-    <h2>8. Fine-Tuning – Incorrect Analogy</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>Compared to customizing Python libraries.</li>
-      <li>Treated as configuration rather than model training.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>Fine-tuning modifies a pre-trained model's internal weights using domain-specific datasets. This requires GPUs, training loops, and labeled data.</p>
-    <div class="example"><strong>Simple Example:</strong> Fine-tune a base LLM to become a legal assistant or bilingual translator.</div>
-  </div>
-
-  <div class="section">
-    <h2>9. In-Context Learning (ICL) – Misunderstood</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>Framed as backend teams learning user behavior.</li>
-      <li>Incorrectly implies permanent learning from queries.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>ICL allows an LLM to learn from examples inside a prompt during inference. No weights are updated; learning is temporary.</p>
-    <div class="example"><strong>Simple Example:</strong> Provide translation pairs → model infers pattern → translates new text.</div>
-  </div>
-
-  <div class="section">
-    <h2>10. Image Generation – Oversimplified and Incorrect</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>Described as embedding rendering in frontend.</li>
-      <li>Misses role of diffusion/GAN architectures.</li>
-    </ul>
-    <p class="correct">✅ Correct Definition:</p>
-    <p>Image generation uses diffusion models, GANs, or decoders. Embeddings guide generation; the frontend only displays the final output.</p>
-    <div class="example"><strong>Simple Example:</strong> Blueprint = prompt; Construction = diffusion; Finished house = final image.</div>
-  </div>
-
-  <div class="section">
-    <h2>11. Misplacement of RAG, Vector DB, and Prompting in Architecture</h2>
-    <p class="incorrect">❌ Incorrect / Partially Correct (as presented):</p>
-    <ul>
-      <li>RAG, vector DB, and retrieval placed in frontend.</li>
-      <li>Prompting treated as a hallucination fix.</li>
-    </ul>
-    <p class="correct">✅ Correct Architecture:</p>
-    <table border="1" cellpadding="8" cellspacing="0">
-      <tr><th>Layer</th><th>Responsible For</th></tr>
-      <tr><td>Frontend</td><td>UI, forms, displaying responses</td></tr>
-      <tr><td>Backend</td><td>APIs, RAG, retrieval, vector DB lookups</td></tr>
-      <tr><td>Model Layer</td><td>LLM inference, embeddings, fine-tuning</td></tr>
-    </table>
-    <p>Prompting can reduce hallucinations but cannot eliminate them. RAG provides true grounding.</p>
-  </div>
-
-  <div class="section">
-    <h2>12. Overall Pattern of Issues</h2>
-    <p>The training session contained several technical inaccuracies:</p>
-    <ul>
-      <li>Confusion between training and inference</li>
-      <li>Incorrect placement of RAG, LoRA, embeddings, tokens</li>
-      <li>Misunderstanding of LLM usage</li>
-      <li>Oversimplified or incorrect analogies</li>
-      <li>Inaccurate mental models of generative AI systems</li>
-    </ul>
-    <p>These issues may lead students to misunderstand modern AI concepts and struggle with real-world implementations.</p>
-  </div>
+  <h2>7. Tokens</h2>
+  <ul>
+    <li><span class="incorrect">Incorrect Purpose:</span> Defined as managing backend queries or tracking usage instead of being text units used for model processing.</li>
+  </ul>
 
 </body>
 </html>
